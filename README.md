@@ -1,3 +1,5 @@
+<img width="1114" height="498" alt="image" src="https://github.com/user-attachments/assets/3ff03300-600f-4c81-af40-49dce90950c8" />
+
 <h1>Active Directory Homelab</h1>
 Active Directory is Microsoft's centralized directory system used for managing users, systems and other resources within a network. It organizes these objects in a domain based structure where it can enforce authentiction, authorization and group policies.
 <h2>Description</h2>
