@@ -1,24 +1,23 @@
 <h1>Active Directory Homelab</h1>
-
+Active Directory is Microsoft's centralized directory system used for managing users, systems and other resources within a network. It organizes these objects in a domain based structure where it can enforce authentiction, authorization and group policies.
 <h2>Description</h2>
-Project consists of a simple PowerShell script that walks the user through "zeroing out" (wiping) any drives that are connected to the system. The utility allows you to select the target disk and choose the number of passes that are performed. The PowerShell script will configure a diskpart script file based on the user's selections and then launch Diskpart to perform the disk sanitization.
+In this lab, we will create a virtualized Active Directory Homelab using VirtualBox. We will create two vritual machines, the first one being a Windows 11 host and the other will be a Windows Server 2022 host which will serve as the domain controller. We will place the VMs within the same VNET and join the Windows 11 host to the domain.
 <br />
 
 
-<h2>Languages and Utilities Used</h2>
+<h2>Technologies Used</h2>
 
-- <b>PowerShell</b> 
-- <b>Diskpart</b>
+- <b>VirtualBox</b> 
+- <b>Active Directory Domain Services</b>
+- <b>Windows 11</b>
+- <b>Windows Server 2022</b> 
 
-<h2>Environments Used </h2>
+<h2>Lab walk-through:</h2>
 
-- <b>Windows 10</b> (21H2)
-
-<h2>Program walk-through:</h2>
-
-<p align="center">
-Launch the utility: <br/>
-<img src="https://i.imgur.com/62TgaWL.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+ <br/>
+	1. Download VirtualBox from this link:(https://www.virtualbox.org/wiki/Downloads). Choose the version that matches the OS of your host computer.
+ <br/>
+<img src=(https://imgur.com/a/8C1vLkU)>
 <br />
 <br />
 Select the disk:  <br/>
