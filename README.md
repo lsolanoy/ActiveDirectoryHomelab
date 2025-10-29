@@ -1,7 +1,7 @@
 <img width="1114" height="498" alt="image" src="https://github.com/user-attachments/assets/3ff03300-600f-4c81-af40-49dce90950c8" />
 
 <h1>Active Directory Homelab</h1>
-Active Directory is Microsoft's centralized directory system used for managing users, systems and other resources within a network. It organizes these objects in a domain based structure where it can enforce authentiction, authorization and group policies.
+Active Directory is Microsoft's centralized directory system used for managing users, systems and other resources within a network. It organizes these objects in a domain based structure where it can enforce authentication, authorization and group policies.
 <h2>Description</h2>
 In this lab, we will create a virtualized Active Directory Homelab using VirtualBox. We will create two vritual machines, the first one being a Windows 11 host and the other will be a Windows Server 2022 host which will serve as the domain controller. We will place the VMs within the same VNET and join the Windows 11 host to the domain. The aim of this project is to guide individuals through the process of creating a basic Active Diretory Homelab where they can learn by simulating real-world scenarios.
 <br />
@@ -42,7 +42,7 @@ Windows 11 Host Setup
 <img width="883" height="506" alt="image" src="https://github.com/user-attachments/assets/82e45ede-e9ca-4303-8faa-7ad5be3baea8" />
 <br />
 <br />
-6. On the last page, it will show you the summary of your configurations and at this point you can click "Finish". On the main menu of VirtualBox you can boot up the VM by clicking "Start"
+6. On the last page, it will show you the summary of your configurations and at this point you can click "Finish". On the main menu of VirtualBox you can boot up the VM by clicking "Start".
 <br/>
 <img width="867" height="442" alt="image" src="https://github.com/user-attachments/assets/eb2f4be0-3abd-43f9-8732-378fbe748b48" />=
 <br />
@@ -85,8 +85,97 @@ Windows Server 2022 Setup
 <br />
 
 Setting up Windows Server 2022 as Domain Controller
-1. When we boot up the Windows Server VM the Server Manager Dashboard will open automactically. Here, we will turn this system into a DC.
+1. When we boot up the Windows Server VM the Server Manager Dashboard will open automatically. Here, we will turn this system into a DC.
+ <br/>
 <img width="1900" height="838" alt="image" src="https://github.com/user-attachments/assets/16c945d4-af31-45ea-9f64-8f01e66a75e1" />
+<br />
+<br />
+2. First we will change name of computer by going to the search bar and typing "View your PC name" > Rename this PC > Name it "DC01" > Restart Machine. The purpose of this is to give the computer an easy naming convention to follow.
+<br/>
+<img width="1034" height="520" alt="image" src="https://github.com/user-attachments/assets/db9b2b2b-d898-4ebc-982f-48d061383e20" />
+<br />
+<br />
+3. Now we will be configuring this machine as the domain controller. On the main menu of sever manager click "Manage" > click "Add Roles and Features"
+<br/>
+<img width="842" height="602" alt="image" src="https://github.com/user-attachments/assets/34482f94-b49f-4f73-8e0f-7670098c02b8" />
+<br />
+<br />
+4. Now we will go through the options to select for each section. Click "Next" > Select "Role-based or feature based installation" > Select "DC01" in Server Pool > Check the box next to "Active Directory Domain Services" > Click "Next" > Click Install.
+ <br/>
+<img width="837" height="601" alt="image" src="https://github.com/user-attachments/assets/e647cc6a-cfc5-4935-8584-371a43697f9f" />
+<br />
+<br />
+5. Once the installion is completed click on the option "Promote this server to a domain controller".
+<br/>
+<img width="832" height="593" alt="image" src="https://github.com/user-attachments/assets/f574415d-e576-4af4-81e2-91ee6f593edd" />
+<br />
+<br />
+6. These will be the selections for Configuring Active Directory: Select "Add a new forest", Name your domain with ".local" at the end of it > Create password > Click "Next" > Click "Next" > Make sure all configurations are correct then click "Next" > The system will go through a prerequisite check > Once all checks are passed you can begin installation.
+<br/>
+<img width="805" height="594" alt="image" src="https://github.com/user-attachments/assets/d44b9871-9ebb-4218-af9a-b2d65355db99" />
+<img width="821" height="600" alt="image" src="https://github.com/user-attachments/assets/24b047e0-a156-46df-b56c-387d6f97cde6" />
+<br />
+<br />
+7. This VM is now configured as the Domain Controller. You can confirm by navgating to Active Directory Users and Computers and click on the Domain Controllers Tab.
+<br/>
+<img width="750" height="531" alt="image" src="https://github.com/user-attachments/assets/8e13ecea-c34c-4188-a9c8-89701e398f88" />
+<br />
+<br />
 
+Creating Domain Users
+1. We will create users in this domain that will be able to login from the Windows 11 host. First, on your Domain Controller open the Server Mangeer. Go to "Tools" > Active Directory Users and Computers.
+<br/>
+<img width="604" height="427" alt="image" src="https://github.com/user-attachments/assets/bfede819-1248-4e2e-9647-b4d6c2a3e777" />
+<br />
+<br />
+2. Click on the Users folder. Right click anywhere on the white space under the users and Select New. A window will pop up where you can create a new user.
+<br/>
+<img width="355" height="297" alt="image" src="https://github.com/user-attachments/assets/c95971e6-1641-496a-a119-4e81c01d6d5f" /> <img width="355" height="297" alt="image" src="https://github.com/user-attachments/assets/4c299920-1848-4213-9a91-bbe7a4c144cf" />
+<img width="355" height="297" alt="image" src="https://github.com/user-attachments/assets/523cf91a-7d42-46aa-929f-cf63c5b782b6" />
+
+<br />
+<br />
+3. Use any name that you want. For the logon name use the first letter of the first name followed by the last name. Click "Next". Set a password for user and check the box that says password never expires. However, in a real work environment it would be set to "user must change password at next logon" for best security practice. Click "Finish" and user has been successfully created. Create 2 additional users.
+<br/>
+<br/>
+Join Windows 11 VM to Domain
+1. First we have to create a NAT Network where the VMs will reside in. On th main menu of VirtualBox go to File > Tools > Network Manager. On this page click on the "NAT network" tab and click "Create". Give the network a name. Click Apply.
+<br/>
+<img width="755" height="639" alt="image" src="https://github.com/user-attachments/assets/6dbf8441-0ec5-4928-92df-dcbf91715d0a" />
+<br />
+<br />
+
+2. Now we will have to attach the VMs to the Network. On main menu of VirtualBox click on your Windows 11 VM > click "Settings > Select "Network" tab. Next to the "Attached To:" option, select NAT Network. For the "name" option select the network you created. Repeat these steps for the other VM.
+<br/>
+<img width="1029" height="810" alt="image" src="https://github.com/user-attachments/assets/7e147948-6fd9-4061-8eee-fecaa0574f01" />
+<br />
+<br />
+
+3. Make sure both VMs are running. Log into your DC. First, we will set the server to have a static IP address. Go to command prompt and type "ipconfig", take note of the IP address. Now we will set static IP by searching Settings > Change Adpater Options > Right-click on the adapter for domain > Click Properties > Click IPv4 > Click Use the folllwing IP address. Copy the same IP address, Subnet Mask and Default Gateway from "ipconfig" output. For DNS server set it to 127.0.0.1 because this machine will host DNS.
+<br/>
+<img width="690" height="507" alt="image" src="https://github.com/user-attachments/assets/4cce55ae-88e5-4a0c-a563-c3f3992c7a65" />
+<img width="1002" height="543" alt="image" src="https://github.com/user-attachments/assets/de27b294-2f67-45bc-8ffb-f1d07b5d5170" />
+<br />
+<br />
+
+4. Now we will login to the Windows 11 VM. First we will chnage the computer's name. Search "view your PC name" > Click "Rename this PC" > Name it "WS01". This makes it easier to indentify this PC.
+<br/>
+<img width="565" height="229" alt="image" src="https://github.com/user-attachments/assets/0963bc03-cdcf-4530-9822-0a127e84e17b" />
+<br />
+<br />
+
+5. We will also set a static IP address for this machine. Go to command prompt and type "ipconfig" command. Take note of output. Navigate to the adapter settings shown in previous steps and fill out the IPv4 properties. For the DNS server addresss we will set it to the IP of the server.
+<br/>
+<img width="356" height="403" alt="image" src="https://github.com/user-attachments/assets/319c533b-bee7-4a92-a9cd-b0f98a9af197" />
+<br />
+<br />
+
+6. Finally, we will be attaching the Windows 11 Machine to the domain. Search "access work or schools" > Click "connect" > Click "Join this device to local Active Directory domain" > Enter Domain name > Enter username and password of domain admin > VM will restart. Once your VM restarts you will see that you can login into domain as administrator or we can login as the other users we made previously.
+<br/>
+<img width="588" height="577" alt="image" src="https://github.com/user-attachments/assets/cbbfc0fe-2ae9-421f-8ed6-ca6c28b9036d" />
+<img width="593" height="245" alt="image" src="https://github.com/user-attachments/assets/582674fe-2a99-47d5-8bff-444ea2be8ff6" />
+<img width="946" height="707" alt="image" src="https://github.com/user-attachments/assets/a6bd0eda-c076-4fa3-95c9-6470e885d0d4" />
+<br />
+<br />
 </p>
 
