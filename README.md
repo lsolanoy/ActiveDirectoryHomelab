@@ -54,7 +54,39 @@ Windows 11 Host Setup
 <br />
 8. The VM will restart again, and then you will have to go through the Windows Account Set-up: Select Region, Select Keyboard layout, Skip "Sign-in" Options, Enter name for device, Enter password, Choose privacy settings, then your finished. Login with your account and the host is ready for use.
 <img width="1029" height="775" alt="image" src="https://github.com/user-attachments/assets/4d503f55-8384-46be-a2cd-dc1dcf34927a" />
-9. 
 <br />
+
+Windows Server 2022 Setup
+1. Download the Windows Server 2022 ISO image from this link: (https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022?msockid=0a7f04a9dbd163d10908128cda3f626a)
+ <br/>
+<img width="1886" height="934" alt="image" src="https://github.com/user-attachments/assets/84bdb97e-340c-4bca-8a24-2a67accb4cc5" />
+<br />
+<br />
+2. On VirtualBox, click "New" and we will go the same process when we created the Windows 11 machine.
+ <br/>
+<img width="630" height="361" alt="image" src="https://github.com/user-attachments/assets/78673a3e-d916-43e5-9ef1-5714c4d0bcdc" />
+<br />
+<br />
+3. For the hardware we will add 4096 MB and 2 cores. For thr virtual disk, we will put it to 50 GB. Once you hvae these configurations done, Click "Finish" and bootup VM.
+ <br/>
+<img width="638" height="366" alt="image" src="https://github.com/user-attachments/assets/2f78a62e-c8ff-4e7d-9d89-dbb85241d29d" />
+<br />
+<br />
+4. Once the VM is up and running, we will have to go through the final setup: Select your language, Select "Desktop Experience" for OS, Select Custom Installation, then Install.
+ <br/>
+<img width="475" height="360" alt="image" src="https://github.com/user-attachments/assets/711f5ad3-9400-4e7b-899c-c349e589ceb1" />
+<br />
+<br />
+5. The machine will restart and once it boots up again. We will have to create a password for the Administrator Account. Once the account is made you can login into the machine and it is ready for use.
+ <br/>
+<img width="746" height="554" alt="image" src="https://github.com/user-attachments/assets/67f2d236-415d-464a-807b-4195409ee9c0" />
+<img width="774" height="586" alt="image" src="https://github.com/user-attachments/assets/bf55fb6c-4a25-42ed-838b-232afacfb911" />
+<br />
+<br />
+
+Setting up Windows Server 2022 as Domain Controller
+1. When we boot up the Windows Server VM the Server Manager Dashboard will open automactically. Here, we will turn this system into a DC.
+<img width="1900" height="838" alt="image" src="https://github.com/user-attachments/assets/16c945d4-af31-45ea-9f64-8f01e66a75e1" />
+
 </p>
 
